@@ -12,8 +12,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.UIManager;
 
 public class JCalc extends JFrame {
@@ -81,12 +83,18 @@ public class JCalc extends JFrame {
 
 	protected void calculateResult() {
 		try {
-			Object result = jit.calculate(inputArea.getText());
+			String input = expandShortForms(inputArea.getText());
+			Object result = jit.calculate(input);
 			lblResult.setText(result.toString());
 		} catch (ScriptException e) {
 			JOptionPane.showMessageDialog(this, "An error occured evaluating your input\n"+e.getMessage(), "Error",JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 		
+	}
+
+	private String expandShortForms(String text) {
+		//TODO: regex magic
+		return text;
 	}
 }
